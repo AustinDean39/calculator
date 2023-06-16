@@ -23,11 +23,25 @@ function divide(num1, num2) {
 const calculator = {
   currentValue: 0,
   nextValue: 0,
-  operator: {
-    '+': add(currentValue, nextValue),
-    '-': subtract(currentValue, nextValue),
-    '*': multiply(currentValue, nextValue),
-    '/': divide(currentValue, nextValue),
+  operator: '',
+  operatorFunc(symbol) {
+    switch (symbol) {
+      case '+':
+        return add(this.currentValue, this.nextValue);
+      case '-':
+        return subtract(this.currentValue, this.nextValue);
+      case '*':
+        return multiply(this.currentValue, this.nextValue);
+      case '/':
+        return divide(this.currentValue, this.nextValue);
+      default: 
+        return 'ERROR';
+    }
+  } ,
+  operate(num1, operator, num2) {
+    this.currentValue = num1;
+    this.nextValue = num2;
+    this.operator = operator;
+    console.log(this.operatorFunc(operator));
   },
-
-}
+};
