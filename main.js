@@ -9,3 +9,7 @@ function subtract(num1, num2) {
   return num1 - num2;
 }
 
+// Multiply two numbers
+function multiply(num1, num2) {
+  return num1 * num2;
+}
