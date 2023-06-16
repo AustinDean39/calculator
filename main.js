@@ -23,7 +23,6 @@ function divide(num1, num2) {
 const calculator = {
   currentValue: 0,
   nextValue: 0,
-  operator: '',
   operatorFunc(symbol) {
     switch (symbol) {
       case '+':
@@ -37,11 +36,12 @@ const calculator = {
       default: 
         return 'ERROR';
     }
-  } ,
+  },
+
   operate(num1, operator, num2) {
     this.currentValue = num1;
     this.nextValue = num2;
-    this.operator = operator;
     console.log(this.operatorFunc(operator));
   },
+
 };
