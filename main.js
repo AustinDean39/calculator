@@ -55,7 +55,7 @@ const displayText = document.getElementById('display-text');
 for (const button of numberButtons.children) {
   button.addEventListener('click', () => {
     let num = button.textContent;
-    
+    // Override display if it's already stored
     if (displayText.textContent == calculator.currentValue) {
       clearScreen();
       displayText.textContent = num;
@@ -70,12 +70,16 @@ displayText.textContent = calculator.currentValue;
 
 // Add functionality to the CLEAR button
 function clearScreen() {
-  displayText.textContent = '';
+  displayText.textContent = '0';
 }
 
 const clearButton = document.getElementById('clear-btn');
-clearButton.addEventListener('click', clearScreen);
+clearButton.addEventListener('click', () => {
+  calculator.currentValue = '0';
+  clearScreen();
+});
 
+// Add functionality for the operator buttons
 const operatorButtons = document.getElementsByClassName('operator');
 for (const button of operatorButtons) {
   button.addEventListener('click', () => {
@@ -100,3 +104,12 @@ for (const button of operatorButtons) {
     console.log(calculator);
   });
 }
+
+// Add functionality for the equals button
+const equalsButton = document.getElementById('btn-equals');
+equalsButton.addEventListener('click', () => {
+  calculator.nextValue = displayText.textContent;
+  displayText.textContent = calculator.operate(calculator.currentValue, calculator.operator, calculator.nextValue);
+  calculator.currentValue = displayText.textContent;
+  calculator.nextValue = '0';
+});
