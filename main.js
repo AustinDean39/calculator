@@ -23,6 +23,7 @@ function divide(num1, num2) {
 const calculator = {
   currentValue: 0,
   nextValue: 0,
+  operator: '',
   operatorFunc(symbol) {
     switch (symbol) {
       case '+':
@@ -68,3 +69,28 @@ function clearScreen() {
 
 const clearButton = document.getElementById('clear-btn');
 clearButton.addEventListener('click', clearScreen);
+
+const operatorButtons = document.getElementsByClassName('operator');
+for (const button of operatorButtons) {
+  button.addEventListener('click', () => {
+    calculator.currentValue = displayText.textContent;
+    switch (button.textContent) {
+      case '+':
+        calculator.operator = '+';
+        break;
+      case '-':
+        calculator.operator = '-';
+        break;
+      case 'x':
+        calculator.operator = '*';
+        break;
+      case '÷':
+        calculator.operator = '/';
+        break;
+      default:
+        calculator.operator = 'ERROR'
+        break;
+    }
+    console.log(calculator);
+  });
+}
