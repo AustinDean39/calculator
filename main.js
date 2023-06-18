@@ -37,6 +37,7 @@ const calculator = {
         return 'ERROR';
     }
   },
+
   // Function to perform one full operation
   operate(num1, operator, num2) {
     this.currentValue = num1;
@@ -53,5 +54,13 @@ for (const button of numberButtons.children) {
   button.addEventListener('click', () => {
     let num = button.textContent;
     displayText.textContent += num;
-  })
+  });
 }
+
+// Add functionality to the CLEAR button
+function clearScreen() {
+  displayText.textContent = '';
+}
+
+const clearButton = document.getElementById('clear-btn');
+clearButton.addEventListener('click', clearScreen);
