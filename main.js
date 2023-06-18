@@ -55,7 +55,13 @@ const displayText = document.getElementById('display-text');
 for (const button of numberButtons.children) {
   button.addEventListener('click', () => {
     let num = button.textContent;
-    displayText.textContent += num;
+    
+    if (displayText.textContent == calculator.currentValue) {
+      clearScreen();
+      displayText.textContent = num;
+    } else {
+      displayText.textContent += num;
+    }
   });
 }
 
