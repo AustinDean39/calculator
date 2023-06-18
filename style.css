@@ -1,7 +1,15 @@
-body {
+* {
   font-family: monospace;
 }
 
+button {
+  font-size: 8vw;
+}
+
+.header {
+  text-align: center;
+  font-size: 5vw;
+}
 .main {
   display: flex;
   justify-content: center;
