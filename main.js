@@ -33,15 +33,25 @@ const calculator = {
         return multiply(this.currentValue, this.nextValue);
       case '/':
         return divide(this.currentValue, this.nextValue);
-      default: 
+      default:
         return 'ERROR';
     }
   },
-
+  // Function to perform one full operation
   operate(num1, operator, num2) {
     this.currentValue = num1;
     this.nextValue = num2;
-    console.log(this.operatorFunc(operator));
+    return this.operatorFunc(operator);
   },
 
 };
+
+// Link number buttons to populate the calculator display
+const numberButtons = document.getElementById('numbers');
+const displayText = document.getElementById('display-text');
+for (const button of numberButtons.children) {
+  button.addEventListener('click', () => {
+    let num = button.textContent;
+    displayText.textContent += num;
+  })
+}
