@@ -83,7 +83,12 @@ clearButton.addEventListener('click', () => {
 const operatorButtons = document.getElementsByClassName('operator');
 for (const button of operatorButtons) {
   button.addEventListener('click', () => {
-    calculator.currentValue = displayText.textContent;
+    if (calculator.operator !== '') {
+      equals();
+    } else {
+      calculator.currentValue = displayText.textContent;
+    }
+
     switch (button.textContent) {
       case '+':
         calculator.operator = '+';
@@ -101,15 +106,18 @@ for (const button of operatorButtons) {
         calculator.operator = 'ERROR'
         break;
     }
-    console.log(calculator);
   });
 }
 
-// Add functionality for the equals button
-const equalsButton = document.getElementById('btn-equals');
-equalsButton.addEventListener('click', () => {
+// Separate function for calculating & displaying
+function equals() {
   calculator.nextValue = displayText.textContent;
   displayText.textContent = calculator.operate(calculator.currentValue, calculator.operator, calculator.nextValue);
   calculator.currentValue = displayText.textContent;
   calculator.nextValue = '0';
-});
+  calculator.operator = '';
+}
+
+// Add functionality for the equals button
+const equalsButton = document.getElementById('btn-equals');
+equalsButton.addEventListener('click', equals);
