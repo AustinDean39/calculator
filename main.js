@@ -55,6 +55,15 @@ const displayText = document.getElementById('display-text');
 for (const button of numberButtons.children) {
   button.addEventListener('click', () => {
     let num = button.textContent;
+    // Disable the decimal button if it is already on the screen to avoid
+    // multiple decimal points in one number
+    if (num === '.' && displayText.textContent.includes('.')) {
+      return;
+    } else if (num === '.' && displayText.textContent === '0') {
+      displayText.textContent += '.';
+      return;
+    }
+
     // Override display if it's already stored
     if (displayText.textContent == calculator.currentValue) {
       clearScreen();
@@ -85,6 +94,10 @@ for (const button of operatorButtons) {
   button.addEventListener('click', () => {
     if (calculator.operator !== '') {
       equals();
+    } else if (displayText.textContent.charAt(-1) == '.') {
+      // If it ends with a decimal point, append a 0 to avoid errors
+      displayText.textContent += '0';
+      calculator.currentValue = displayText.textContent;
     } else {
       calculator.currentValue = displayText.textContent;
     }
@@ -111,8 +124,17 @@ for (const button of operatorButtons) {
 
 // Separate function for calculating & displaying
 function equals() {
-  calculator.nextValue = displayText.textContent;
-  displayText.textContent = calculator.operate(calculator.currentValue, calculator.operator, calculator.nextValue);
+  if (displayText.textContent.charAt(-1) == '.') {
+    // If it ends with a decimal point, append a 0 to avoid errors
+    displayText.textContent += '0';
+    calculator.nextValue = displayText.textContent;
+  } else {
+    calculator.nextValue = displayText.textContent;
+  }
+  displayText.textContent = calculator.operate(
+    calculator.currentValue,
+    calculator.operator,
+    calculator.nextValue);
   calculator.currentValue = displayText.textContent;
   calculator.nextValue = '0';
   calculator.operator = '';
