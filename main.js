@@ -69,13 +69,13 @@ for (const button of numberButtons.children) {
       clearScreen();
       displayText.textContent = num;
     } else {
-      displayText.textContent += num;
+      displayText.textContent = round(displayText.textContent + num);
     }
   });
 }
 
 // Initialize the currentValue and screen display
-displayText.textContent = calculator.currentValue;
+displayText.textContent = round(calculator.currentValue);
 
 // Add functionality to the CLEAR button
 function clearScreen() {
@@ -136,10 +136,10 @@ function equals() {
   } else {
     calculator.nextValue = displayText.textContent;
   }
-  displayText.textContent = calculator.operate(
+  displayText.textContent = round(calculator.operate(
     calculator.currentValue,
     calculator.operator,
-    calculator.nextValue);
+    calculator.nextValue));
   calculator.currentValue = displayText.textContent;
   calculator.nextValue = '0';
   calculator.operator = '';
@@ -148,3 +148,16 @@ function equals() {
 // Add functionality for the equals button
 const equalsButton = document.getElementById('btn-equals');
 equalsButton.addEventListener('click', equals);
+
+// Function to round the number on the screen so it does not overflow
+function round(num) {
+  if (num.toString().length > 9) {
+    if (num > 1000000000 || Math.abs(num) < 0.0000001) {
+      return num.toExponential(5);
+    } else {
+      return num.toFixed(7);
+    }
+  } else {
+    return num;
+  }
+}
