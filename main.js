@@ -124,6 +124,11 @@ for (const button of operatorButtons) {
 
 // Separate function for calculating & displaying
 function equals() {
+  // If equals button is pressed before an operator, just return the number
+  if (calculator.operator === '') {
+    calculator.currentValue = displayText.textContent;
+    return;
+  }
   if (displayText.textContent.charAt(-1) == '.') {
     // If it ends with a decimal point, append a 0 to avoid errors
     displayText.textContent += '0';
