@@ -72,9 +72,19 @@ button:active {
   border-radius: 10px;
 }
 
-#clear-btn {
+.functions {
   grid-row: 2 / 3;
   grid-column: 1 / 2;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.functions button {
+  flex: 1 1 auto;
+  margin: 1vh;
+  padding: 10px;
+  font-size: 36px;
 }
 
 .numbers {
