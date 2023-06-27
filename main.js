@@ -166,6 +166,11 @@ function round(num) {
 const backspaceButton = document.getElementById('btn-backspace');
 backspaceButton.addEventListener('click', () => {
   const textArr = displayText.textContent.split('');
-  textArr.pop();
-  displayText.textContent = textArr.join('');
-})
+  // Don't let the user delete the last number or default 0
+  if (textArr.length === 1) {
+    displayText.textContent = '0';
+  } else {
+    textArr.pop();
+    displayText.textContent = textArr.join('');
+  }
+});
