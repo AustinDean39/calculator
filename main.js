@@ -161,3 +161,11 @@ function round(num) {
     return num;
   }
 }
+
+// Connect the delete/backspace button to the calculator & screen
+const backspaceButton = document.getElementById('btn-backspace');
+backspaceButton.addEventListener('click', () => {
+  const textArr = displayText.textContent.split('');
+  textArr.pop();
+  displayText.textContent = textArr.join('');
+})
