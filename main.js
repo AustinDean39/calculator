@@ -151,11 +151,11 @@ equalsButton.addEventListener('click', equals);
 
 // Function to round the number on the screen so it does not overflow
 function round(num) {
-  if (num.toString().length > 9) {
+  if (num.toString().length > 10) {
     if (num > 1000000000 || Math.abs(num) < 0.0000001) {
-      return num.toExponential(5);
+      return parseFloat(num).toExponential(6);
     } else {
-      return num.toFixed(7);
+      return parseFloat(num).toFixed(8);
     }
   } else {
     return num;
